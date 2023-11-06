@@ -1,22 +1,12 @@
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { ContactFormButton, ContactFormError, ContactFormField, ContactFormForm, ContactFormLabel } from './ContactForm.style';
 
-export const ContactForm = ({ addContact, contacts }) => {
-  const handleSubmit = (values, { resetForm }) => {
-    const { name, number } = values;
-    if (contacts.some(contact => contact.name === name)) {
-        alert(`${name} is already in contacts.`);
-        resetForm();
-      return;
-      }
-       const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-    addContact(newContact);
+export const ContactForm = ({ addContact }) => {
+  const handleSubmit = (values, {resetForm}) => {
+    const { name, number } = values;    
+    addContact({name, number});
     resetForm();
   };
 
@@ -44,12 +34,12 @@ export const ContactForm = ({ addContact, contacts }) => {
       validationSchema={validationSchema}
     >
         <ContactFormForm>
-            <ContactFormLabel>Name</ContactFormLabel>
+            <ContactFormLabel htmlFor="name">Name</ContactFormLabel>
               <ContactFormField id="name" type="text" name="name" placeholder="Jim Doun" />
               
               <ContactFormError name="name" component="div" />      
               
-            <ContactFormLabel>Number</ContactFormLabel>
+            <ContactFormLabel htmlFor="number">Number</ContactFormLabel>
               <ContactFormField id="number" type="tel" name="number" placeholder="+XX..." />
               
             <ContactFormError name="number" component="div" />

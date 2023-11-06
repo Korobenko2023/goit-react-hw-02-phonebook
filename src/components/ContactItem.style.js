@@ -11,10 +11,9 @@ export const ContactItemButton = styled.button`
   padding: ${p => p.theme.spasing(1)}  ${p => p.theme.spasing(1)}; 
   background-color: ${p => p.theme.background.Tomato};   
   border-radius: 8px;
-  border: none;    
+  border: 1px solid ${p => p.theme.colors.Indigo};    
   cursor: pointer;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  margin-left: ${p => p.theme.spasing(4)};
   &:hover,
   &:focus {
   background-color: ${p => p.theme.background.blue};  

@@ -2,16 +2,20 @@ import styled from 'styled-components';
 export const FilterDiv = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-
+  max-width: 400px;
+  margin-right: auto;
+  margin-left: auto;
 `;
 
 export const FilterLabel = styled.label`
-  margin-top: ${p => p.theme.spasing(4)}; 
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin-top: ${p => p.theme.spasing(4)}; 
 `;
 
-export const FilterInput = styled.input`
-  width: 50%; 
+export const FilterInput = styled.input`  
+  width: 100%;
   border-radius: 8px;
   outline: none;
   border: 1px solid ${p => p.theme.colors.Indigo};  

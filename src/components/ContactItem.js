@@ -1,10 +1,10 @@
 import { ContactItemButton, ContactItemLi } from "./ContactItem.style";
 
-export const ContactItem = ({ contact, onDelete }) => {
+export const ContactItem = ({ contact : { id, name, number }, onDelete }) => {
   return (
     <ContactItemLi>
-      {contact.name}: {contact.number}
-      <ContactItemButton onClick={() => onDelete(contact.id)}>Delete</ContactItemButton>
+      {name}: {number}
+      <ContactItemButton onClick={() => onDelete(id)}>Delete</ContactItemButton>
     </ContactItemLi>
   );
 };

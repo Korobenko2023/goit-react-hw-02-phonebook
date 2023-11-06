@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { GlobalStyle } from './GlobalStyle';
+import { nanoid } from 'nanoid';
 import { ContactForm } from "./ContactForm";
 import { Filter } from "./Filter";
 import { ContactList } from "./ContactList";
@@ -11,18 +12,24 @@ export class App extends Component {
   }; 
 
   addContact = newContact => {
+    const { contacts } = this.state;
+    const { name, number } = newContact;
+
+    if (contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
      this.setState(prevState => ({
-      contacts: [...prevState.contacts, newContact],
+      contacts: [...prevState.contacts,{ id: nanoid(), name, number }],
     }));
   };
-
 
   deleteContact = contactId => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
-
 
     handleFilterChange = (filter) => {
         this.setState({ filter });
@@ -31,20 +38,19 @@ export class App extends Component {
   render() {
     const { contacts, filter } = this.state;
     const filteredContacts = contacts.filter((contact) =>
-  contact.name && contact.name.toLowerCase().includes(filter.toLowerCase().trim())
+  contact.name.toLowerCase().includes(filter.toLowerCase().trim())
     );
         
     return (
       <AppContainer>
         <AppTitle>Phonebook</AppTitle>
-        <ContactForm addContact={this.addContact} contacts={contacts}
-        />
+        <ContactForm addContact={this.addContact} />
 
         {contacts.length > 0 ? (
           <>
              <AppTitleContact>Contacts list</AppTitleContact>
              <Filter filter={filter} onChange={this.handleFilterChange} />       
-             <ContactList contacts={filteredContacts} deleteContact={this.deleteContact} />
+             <ContactList contacts={filteredContacts} onDelete={this.deleteContact} />
           </>
         ) : null}
             
