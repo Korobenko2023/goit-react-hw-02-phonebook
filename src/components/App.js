@@ -1,65 +1,55 @@
 import { Component } from "react";
-import { SectionTitle } from "./Feedback/SectionTitle";
-import { FeedbackOptions } from "./Feedback/FeedbackOptions";
-import { Notification } from "./Feedback/Notification";
-import { Statistics } from "./Feedback/Statistics";
 import { GlobalStyle } from './GlobalStyle';
-
+import { ContactForm } from "./ContactForm";
+import { Filter } from "./Filter";
+import { ContactList } from "./ContactList";
+import { AppContainer, AppTitleContact } from "./App.style";
 export class App extends Component {
     state = {
-        good: 0,
-        neutral: 0,
-        bad: 0,
+      contacts: [],
+      filter: '',
   }; 
 
-  handleLeaveFeedback = (option) => {
-    this.setState((prevState) => ({
-      [option]: prevState[option] + 1,
+  addContact = newContact => {
+     this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
     }));
   };
-      
-  countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state; 
-      return good + neutral + bad;
-      }; 
 
-  countPositiveFeedbackPercentage = () => {
-    const { good } = this.state;
-    const total = this.countTotalFeedback();
-        
-    if (total === 0) {
-      return 0;
-    }
 
-    return ((good * 100) / total).toFixed(0);
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
   };
 
-  render() {
-    const { good, neutral, bad } = this.state;  
-    const total = this.countTotalFeedback();
-    const positiveFeedback = this.countPositiveFeedbackPercentage();
-    
-    return (
-        <main>
-           <SectionTitle title="Please leave feedback">   
-           <FeedbackOptions options={Object.keys(this.state)} onLeaveFeedback={this.handleLeaveFeedback} />   
-           </SectionTitle>                  
-           <SectionTitle title="Statistics">
-            {total === 0 ? (
-                    <Notification message="There is no feedback" />                      
-                    ) : (
-                   <Statistics
-                        good={good}
-                        neutral={neutral}
-                        bad={bad}
-                        total={total}
-                        positivePercentage={positiveFeedback}
-                      />   
-                )}                    
-            </SectionTitle>  
-            <GlobalStyle />
-         </main>
-      );
-  }   
-} 
 
+    handleFilterChange = (filter) => {
+        this.setState({ filter });
+  };
+   
+  render() {
+    const { contacts, filter } = this.state;
+    const filteredContacts = contacts.filter((contact) =>
+  contact.name && contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+        
+    return (
+      <AppContainer>
+        <h1>Phonebook</h1>
+        <ContactForm addContact={this.addContact} contacts={contacts}
+        />
+
+        {contacts.length > 0 ? (
+          <>
+             <AppTitleContact>Contacts list</AppTitleContact>
+             <Filter filter={filter} onChange={this.handleFilterChange} />       
+             <ContactList contacts={filteredContacts} deleteContact={this.deleteContact} />
+          </>
+        ) : null}
+            
+        <GlobalStyle />
+      </AppContainer>
+    );
+  }
+}

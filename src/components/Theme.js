@@ -4,6 +4,7 @@ export const theme = {
         black: "#212121",
         lightBlack: "#808080",
         violet: "#0900114a",
+        Crimson: "#DC143C",
     },
 
     background: {
@@ -13,6 +14,7 @@ export const theme = {
         lightBlueSecond: "#97deee",
         PowderBlue: "#B0E0E6",
         GreenYellow: "#ADFF2F",
+        Tomato: "#FF6347",
     },
 
     radii: {
