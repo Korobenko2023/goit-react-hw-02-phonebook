@@ -3,7 +3,7 @@ import { GlobalStyle } from './GlobalStyle';
 import { ContactForm } from "./ContactForm";
 import { Filter } from "./Filter";
 import { ContactList } from "./ContactList";
-import { AppContainer, AppTitleContact } from "./App.style";
+import { AppContainer, AppTitle, AppTitleContact } from "./App.style";
 export class App extends Component {
     state = {
       contacts: [],
@@ -31,12 +31,12 @@ export class App extends Component {
   render() {
     const { contacts, filter } = this.state;
     const filteredContacts = contacts.filter((contact) =>
-  contact.name && contact.name.toLowerCase().includes(filter.toLowerCase())
+  contact.name && contact.name.toLowerCase().includes(filter.toLowerCase().trim())
     );
         
     return (
       <AppContainer>
-        <h1>Phonebook</h1>
+        <AppTitle>Phonebook</AppTitle>
         <ContactForm addContact={this.addContact} contacts={contacts}
         />
 

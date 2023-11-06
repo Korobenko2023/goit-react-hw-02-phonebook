@@ -1,9 +1,10 @@
 import styled from 'styled-components';
-export const ContactListUl = styled.ul`    
-  display: flex;
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center;     
-  gap: ${p => p.theme.spasing(3)};  
-  margin-top: ${p => p.theme.spasing(2)};      
+export const ContactListUl = styled.ul`
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;   
+    gap: ${p => p.theme.spasing(3)};  
+    margin-top: ${p => p.theme.spasing(2)};      
 `;

@@ -5,6 +5,7 @@ export const theme = {
         lightBlack: "#808080",
         violet: "#0900114a",
         Crimson: "#DC143C",
+        Indigo: "#4B0082",
     },
 
     background: {
