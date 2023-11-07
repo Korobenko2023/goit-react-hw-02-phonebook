@@ -1,4 +1,3 @@
-// import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { ContactFormButton, ContactFormError, ContactFormField, ContactFormForm, ContactFormLabel } from './ContactForm.style';
